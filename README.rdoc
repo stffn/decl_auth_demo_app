@@ -1,0 +1,42 @@
+
+= declarative_authorization Demo App
+
+This Rails application serves as a demonstrator of the features of the
+declarative_authorization features.  The declarative_authorization plugin
+provides an RBAC-inspired and declarative approach to authorization.  It
+implements a DSL for specifying authorization rules outside of the program
+code.  See the declarative_authorization README for more information.
+
+The demo app is a small conference management application, offering
+conference management for admins, conference and session sign up for
+registered users and a view of the available conferences and sessions to
+guests.
+
+For easing the testing of the various roles, a simple user switcher is
+provided as a drop-down at the top of each page.
+
+Links?
+
+== Getting Started
+
+* Clone the demo apps repository
+    git clone git://github.com/stffn/decl_auth_demo_app.git
+
+* Set up the database connection data by copying and possibly modifying config/database.yml
+
+* Load demo data
+
+Submodules?
+
+== Contact
+
+Steffen Bartsch
+TZI, Universität Bremen, Germany
+sbartsch at tzi.org
+
+
+== Licence
+
+Copyright (c) 2008 Steffen Bartsch, TZI, Universität Bremen, Germany
+released under the MIT license
+
