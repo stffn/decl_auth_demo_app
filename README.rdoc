@@ -23,8 +23,10 @@ Links?
     git clone git://github.com/stffn/decl_auth_demo_app.git
 
 * Set up the database connection data by copying and possibly modifying config/database.yml
+    cp config/database.yml.example config/database.yml
 
-* Load demo data
+* Activate demo data, if you like
+    cp db/development.sqlite3.example db/development.sqlite3
 
 Submodules?
 

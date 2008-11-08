@@ -22,7 +22,7 @@
     <%= link_to "Login", '/login' %> | <%= link_to "Sign up", "/signup" %>
   <% end %>
   <%= select_tag "force_login", 
-            options_for_select(['none', 'stffn', 'tim'], current_user && current_user.login),
+            options_for_select(['none', 'presenter_2', 'admin'], current_user && current_user.login),
             :onchange => "location.href = ($F('force_login') == 'none' ? '/logout' : '/sessions/create?force=1&login=' + $F('force_login'))" %>
 </div>
 <div style="padding: 0.5em; border-bottom: 1px lightgrey solid;">
