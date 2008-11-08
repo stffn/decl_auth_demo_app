@@ -7,6 +7,8 @@ provides an RBAC-inspired and declarative approach to authorization.  It
 implements a DSL for specifying authorization rules outside of the program
 code.  See the declarative_authorization README for more information.
 
+http://github.com/stffn/decl_auth_demo_app/tree/master
+
 The demo app is a small conference management application, offering
 conference management for admins, conference and session sign up for
 registered users and a view of the available conferences and sessions to
@@ -14,8 +16,6 @@ guests.
 
 For easing the testing of the various roles, a simple user switcher is
 provided as a drop-down at the top of each page.
-
-Links?
 
 == Getting Started
 
