@@ -1,0 +1,15 @@
+#topnav {
+  background-color: lightgrey; 
+  margin: 0; 
+  padding: 0.5em; 
+  border-bottom: 1px grey solid;
+}
+
+.user#topnav { background-color: #99ccff; }
+.admin#topnav { background-color: #ff6666; }
+
+#topnav a {
+    color: black;
+    font-weight: bold;
+    background: none;
+}

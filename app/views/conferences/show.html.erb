@@ -1,0 +1,10 @@
+<h1><%=h @conference.title %></h1>
+At <b><%=h @conference.location %></b>
+
+<h2>Talks</h2>
+<%= render :partial => 'talks/talks', :object => @conference.talks %>
+
+<br />
+
+<%= link_to 'New talk', new_conference_talk_path(@conference) if permitted_to? :create, Talk.new(:conference => @conference) %>
+<%= link_to 'Edit conference', edit_conference_path(@conference) if permitted_to? :edit, @conference %>

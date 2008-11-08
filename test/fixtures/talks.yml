@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  user_id: 1
+  abstract: MyText
+  start: 2008-08-15 11:00:57
+
+two:
+  title: MyString
+  user_id: 1
+  abstract: MyText
+  start: 2008-08-15 11:00:57

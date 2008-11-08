@@ -1,0 +1,34 @@
+<h1>Conferences</h1>
+
+<% for conference in @conferences %>
+  <div style="border-bottom: 1px solid lightgrey; padding-bottom: 0.5em">
+    <h3><%= link_to h(conference.title), conference %></h3>
+    <p>
+      At <b><%=h conference.location %></b>, 
+      <b><%= conference.attendees.count %></b> attendees.
+    </p>
+    <p>
+      <%= link_to 'Edit', edit_conference_path(conference) \
+              if permitted_to? :edit, conference %>
+      <%= link_to 'Destroy', conference, :confirm => 'Are you sure?', :method => :delete \
+              if permitted_to? :delete, conference %>
+    
+      <% if conference.is_attended_by?(current_user) and 
+                permitted_to? :delete, conference.attendence_of(current_user) %>
+        <%= link_to 'Unregister', [conference, conference.attendence_of(current_user)], :method => :delete %>
+      <% elsif permitted_to? :create, 
+                ConferenceAttendee.new(:user => current_user, :conference => conference) %>
+        <% form_for([conference, ConferenceAttendee.new]) do |f| %>
+          <%= f.submit "Register" %>
+        <% end %>
+      <% elsif !logged_in? %>
+        <%= link_to "Login", '/login' %> or <%= link_to "sign up", "/signup" %>
+        to register.
+      <% end %>
+    </p>
+  </div>
+<% end %>
+
+<br />
+
+<%= link_to 'New conference', new_conference_path if permitted_to? :create, :conferences %>

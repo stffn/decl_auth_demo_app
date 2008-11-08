@@ -1,0 +1,8 @@
+
+<h3><%=h @talk.title %></h3>
+<p>Held by <b><%=h @talk.user.login if @talk.user %></b> at <b><%=h @talk.start %></b>.</p>
+<p><%=h @talk.abstract %></p>
+<p>
+  <%= link_to 'Edit', edit_conference_talk_path(@talk.conference, @talk) if permitted_to? :edit, @talk %>
+  <%= link_to 'Destroy', [@talk.conference, @talk], :confirm => 'Are you sure?', :method => :delete if permitted_to? :delete, @talk %>
+</p>

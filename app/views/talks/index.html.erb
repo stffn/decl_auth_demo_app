@@ -1,0 +1,7 @@
+<h1>Talks for <%= h @conference.title %></h1>
+
+<%= render :partial => 'talks', :object => @talks %>
+
+<br />
+
+<%= link_to 'New talk', new_conference_talk_path(@conference) %>

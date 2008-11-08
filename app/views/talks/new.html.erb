@@ -1,0 +1,25 @@
+<h1>New talk for <%= h @talk.conference.title %></h1>
+
+<% form_for([@talk.conference, @talk]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.collection_select :user_id, User.all, :id, :login, :prompt => true %>
+  </p>
+  <p>
+    <%= f.label :abstract %><br />
+    <%= f.text_area :abstract %>
+  </p>
+  <p>
+    <%= f.label :start %><br />
+    <%= f.datetime_select :start %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>

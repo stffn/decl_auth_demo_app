@@ -1,0 +1,2 @@
+module TalkAttendeesHelper
+end

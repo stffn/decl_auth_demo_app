@@ -1,0 +1,28 @@
+
+<% for talk in talks %>
+  <div style="border-bottom: 1px solid lightgrey; padding-bottom: 0.5em">
+    <h3><%=link_to h(talk.title), [talk.conference, talk] %></h3>
+    <p>
+      Held by <b><%=h talk.user.login if talk.user %></b> at <b><%=h talk.start %></b>.
+      Currently, <b><%= pluralize(talk.attendees.count, 'attendee') %></b>.
+    </p>
+    <p><%=h talk.abstract %></p>
+    <p>
+      <%= link_to 'Edit', edit_conference_talk_path(talk.conference, talk) if permitted_to? :edit, talk %>
+      <%= link_to 'Destroy', [talk.conference, talk], :confirm => 'Are you sure?', :method => :delete if permitted_to? :delete, talk %>
+      <% if logged_in? %>
+        <% if talk.is_attended_by?(current_user) %>
+          <%= link_to 'Unattend talk', [talk.conference, talk, talk.attendence_of(current_user)], :method => :delete %>
+        <% elsif permitted_to? :create, TalkAttendee.new(:talk => talk, :user => current_user) %>
+          <% form_for([talk.conference, talk, TalkAttendee.new]) do |f| %>
+            <%= f.submit "Attend" %>
+          <% end %>
+        <% else %>
+          To attend this talk, please register with the conference first.
+        <% end %>
+      <% else %>
+        To attend talks, please <%= link_to 'log in', '/login' %> or <%= link_to "sign up", "/signup" %>.
+      <% end %>
+    </p>
+  </div>
+<% end %>
