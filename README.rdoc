@@ -28,7 +28,13 @@ Links?
 * Activate demo data, if you like
     cp db/development.sqlite3.example db/development.sqlite3
 
-Submodules?
+* Initialize plugin submodules
+    git submodule init
+    git submodule update
+
+* Start server and point your browser to localhost:3000 :)
+    ./script/server
+    firefox http://localhost:3000
 
 == Contact
 
