@@ -1,4 +1,6 @@
 class ConferenceAttendeesController < ApplicationController
+  # See ConferenceController for comments on the most common use of 
+  # filter_access_to
   filter_access_to :all
   filter_access_to :destroy, :attribute_check => true
     
@@ -12,6 +14,11 @@ class ConferenceAttendeesController < ApplicationController
     end
   end
 
+  # In the case of create, declarative_authorization cannot load an
+  # object from the params hash by default.  The object is needed to
+  # check the authorization rules defined in the configuration.
+  # Instead, an new Attendee object is created with the known parameters
+  # and checked for in a block given to filter_access_to.
   filter_access_to :create do
     @conference = Conference.find(params[:conference_id])
     @attendee = ConferenceAttendee.new(:conference => @conference,

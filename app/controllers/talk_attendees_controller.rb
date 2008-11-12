@@ -1,4 +1,6 @@
 class TalkAttendeesController < ApplicationController
+  # See ConferenceController for comments on the most common use of 
+  # filter_access_to
   filter_access_to :all
   filter_access_to :destroy, :attribute_check => true
     
@@ -12,6 +14,8 @@ class TalkAttendeesController < ApplicationController
     end
   end
 
+  # See ConferenceAttendeesController for comments on the use of 
+  # filter_access_to with custom permission checks.
   filter_access_to :create do
     @talk = Talk.find(params[:talk_id])
     @attendee = TalkAttendee.new(:talk => @talk,

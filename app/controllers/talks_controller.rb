@@ -1,4 +1,6 @@
 class TalksController < ApplicationController
+  # See ConferenceController for comments on the most common use of 
+  # filter_access_to
   filter_access_to :all
   filter_access_to :show, :update, :destroy, :attribute_check => true
   

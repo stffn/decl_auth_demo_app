@@ -25,12 +25,6 @@ class User < ActiveRecord::Base
   # anything else you want your user to change should be added here.
   attr_accessible :login, :email, :name, :password, :password_confirmation, :roles
 
-  serialize :roles, Array
-  
-  has_many :talk_attendees
-  has_many :conference_attendees
-
-
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   #
   # uff.  this is really an authorization, not authentication routine.  
@@ -41,9 +35,24 @@ class User < ActiveRecord::Base
     u = find_by_login(login) # need to get the salt
     u && u.authenticated?(password) ? u : nil
   end
+
   
+  # Start of code needed for the declarative_authorization plugin
+  # 
+  # Roles are stored in a serialized field of the User model.
+  # For many applications a separate UserRole model might be a
+  # better choice.
+  serialize :roles, Array
+
+  # The necessary method for the plugin to find out about the role symbols
+  # Roles returns e.g. [:admin]
   def roles
     r = (super || []).map {|r| r.to_sym}
   end
+  # End of declarative_authorization code
 
+  
+  # Application-specific code  
+  has_many :talk_attendees
+  has_many :conference_attendees
 end

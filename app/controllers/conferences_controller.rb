@@ -1,7 +1,12 @@
 class ConferencesController < ApplicationController
+  # Installs a before_filter to check accesses on all actions for the user's
+  # authorization.
   filter_access_to :all
-  filter_access_to :show, :edit, :update, 
-    :destroy, :attribute_check => true
+  # Overrides the default checks by explicitly using attribute checks
+  # against the parameters.  This causes the declarative_authorization
+  # plugin to load a Conference object from params[:id] into
+  # the @conference instance variable.
+  filter_access_to :show, :edit, :update, :destroy, :attribute_check => true
   
   # GET /conferences
   # GET /conferences.xml

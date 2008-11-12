@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  # See ConferenceController for comments on the most common use of 
+  # filter_access_to
   filter_access_to :all
   filter_access_to :edit, :update, :attribute_check => true
 

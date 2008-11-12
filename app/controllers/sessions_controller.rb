@@ -1,5 +1,7 @@
 # This controller handles the login/logout function of the site.  
 class SessionsController < ApplicationController
+  # This controller has no filter_access_to statements, as everyone
+  # may try to login or logout.
 
   # render new.rhtml
   def new
