@@ -36,6 +36,17 @@ provided as a drop-down at the top of each page.
     ./script/server
     firefox http://localhost:3000
 
+
+== Database Model
+
+  Conference -----* ConferenceAttendee  *------ User -.
+      |                                          |    |
+      |                                 (is given by) |
+      *                                          |    |
+    Talk *-(gives)-------------------------------'    |
+      |                                               *
+      `----------------------------------* TalkAttendees
+
 == Contact
 
 Steffen Bartsch
