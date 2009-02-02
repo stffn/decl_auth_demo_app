@@ -3,6 +3,7 @@
 one:
   title: MyString
   location: MyString
+  published: true
 
 two:
   title: MyString

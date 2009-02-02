@@ -1,4 +1,6 @@
 class Conference < ActiveRecord::Base
+  using_access_control
+  
   has_many :talk_objs, :class_name => "Talk"
   has_many :conference_attendees
   has_many :attendees, :through => :conference_attendees, :source => :user

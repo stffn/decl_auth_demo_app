@@ -8,36 +8,37 @@ class ConferencesControllerTest < ActionController::TestCase
   end
 
   def test_should_get_new
-    get :new
+    get_with admin, :new
     assert_response :success
   end
 
-  def test_should_create_conferences
-    assert_difference('Conferences.count') do
-      post :create, :conferences => { }
+  def test_should_create_conference
+    assert_difference('Conference.count') do
+      post_with admin, :create, :conference => { :title => 'Test' }
     end
 
-    assert_redirected_to conferences_path(assigns(:conferences))
+    assert_redirected_to conference_path(assigns(:conference))
   end
 
-  def test_should_show_conferences
+  def test_should_show_conference
     get :show, :id => conferences(:one).id
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, :id => conferences(:one).id
+    get_with admin, :edit, :id => conferences(:one).id
     assert_response :success
   end
 
-  def test_should_update_conferences
-    put :update, :id => conferences(:one).id, :conferences => { }
-    assert_redirected_to conferences_path(assigns(:conferences))
+  def test_should_update_conference
+    put_with admin, :update, :id => conferences(:one).id,
+        :conference => { :title => 'Test'}
+    assert_redirected_to conference_path(assigns(:conference))
   end
 
-  def test_should_destroy_conferences
-    assert_difference('Conferences.count', -1) do
-      delete :destroy, :id => conferences(:one).id
+  def test_should_destroy_conference
+    assert_difference('Conference.count', -1) do
+      delete_with admin, :destroy, :id => conferences(:one).id
     end
 
     assert_redirected_to conferences_path
