@@ -1,6 +1,8 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
+  #using_access_control
+  
   include Authentication
   include Authentication::ByPassword
   include Authentication::ByCookieToken
@@ -46,8 +48,8 @@ class User < ActiveRecord::Base
 
   # The necessary method for the plugin to find out about the role symbols
   # Roles returns e.g. [:admin]
-  def roles
-    r = (super || []).map {|r| r.to_sym}
+  def role_symbols
+    r = (roles || []).map {|r| r.to_sym}
   end
   # End of declarative_authorization code
 
