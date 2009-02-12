@@ -4,7 +4,7 @@ require 'test_help'
 require File.expand_path(File.dirname(__FILE__) +
     "/../vendor/plugins/declarative_authorization/lib/maintenance")
 
-class Test::Unit::TestCase
+class ActiveSupport::TestCase
   include Authorization::TestHelper
   # Transactional fixtures accelerate your tests by wrapping each test method
   # in a transaction that's rolled back on completion.  This ensures that the

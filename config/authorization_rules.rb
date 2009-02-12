@@ -12,8 +12,8 @@ authorization do
   role :user do
     includes :guest
     has_permission_on :conference_attendees, :to => :create do
-      if_attribute :user => is {user}#, 
-         #:conference => { :published => true }
+      if_attribute :user => is {user}, 
+        :conference => { :published => true }
     end
     has_permission_on :conference_attendees, :to => :delete do
       if_attribute :user => is {user}, 
