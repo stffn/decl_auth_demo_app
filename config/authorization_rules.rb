@@ -7,6 +7,7 @@ authorization do
       if_attribute :conference => {:published => true}
     end
     has_permission_on :users, :to => :create
+    has_permission_on :authorization_rules, :to => :read
   end
   
   role :user do
