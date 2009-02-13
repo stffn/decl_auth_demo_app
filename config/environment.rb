@@ -64,4 +64,7 @@ Rails::Initializer.run do |config|
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
+
+  # Problems with reloading of files in lib and the authorization browser
+  config.load_once_paths += %W( #{RAILS_ROOT}/lib )
 end
