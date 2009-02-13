@@ -13,3 +13,5 @@
     font-weight: bold;
     background: none;
 }
+
+#topnav form, #topnav form div { display: inline }
