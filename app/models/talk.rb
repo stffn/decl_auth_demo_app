@@ -1,4 +1,6 @@
 class Talk < ActiveRecord::Base
+  using_access_control
+  
   belongs_to :conference
   belongs_to :user
   has_many :talk_attendees

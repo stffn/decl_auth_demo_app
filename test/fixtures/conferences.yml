@@ -5,6 +5,11 @@ one:
   location: MyString
   published: true
 
+public:
+  title: MyString
+  location: MyString
+  published: true
+
 two:
   title: MyString
   location: MyString

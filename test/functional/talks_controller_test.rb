@@ -22,7 +22,7 @@ class TalksControllerTest < ActionController::TestCase
   end
 
   def test_should_show_talk
-    get :show, :id => talks(:one).id
+    get :show, :id => talks(:one).id, :conference_id => talks(:one).conference_id
     assert_response :success
   end
 

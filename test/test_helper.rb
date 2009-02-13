@@ -39,7 +39,6 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...+
   def admin
-    users(:admin).inspect
     users(:admin)
   end
 end
