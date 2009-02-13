@@ -1,45 +1,26 @@
 class TalkAttendeesController < ApplicationController
+  before_filter :load_talk
+  before_filter :new_talk_attendee_from_params, :only => :create
   # See ConferenceController for comments on the most common use of 
   # filter_access_to
-  filter_access_to :all
-  filter_access_to :destroy, :attribute_check => true
-    
-  def index
-    @talk = Talk.find(params[:talk_id])
-    @attendees = @talk.attendees
+  filter_access_to :all, :attribute_check => true
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @attendees }
-    end
-  end
-
-  # See ConferenceAttendeesController for comments on the use of 
-  # filter_access_to with custom permission checks.
-  filter_access_to :create do
-    @talk = Talk.find(params[:talk_id])
-    @attendee = TalkAttendee.new(:talk => @talk,
-                                 :user => current_user)
-    permitted_to!(:create, @attendee)
-  end
   def create
     respond_to do |format|
-      if @attendee.save
+      if @talk_attendee.save
         flash[:notice] = 'Successfully signed up to talk.'
         format.html { redirect_to(@talk.conference) }
-        format.xml  { render :xml => @attendee, :status => :created, :location => @talk }
+        format.xml  { render :xml => @talk_attendee, :status => :created, :location => @talk }
       else
         flash[:error] = 'Error signing up to talk.'
         format.html { redirect_to(@talk.conference) }
-        format.xml  { render :xml => @attendee.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @talk_attendee.errors, :status => :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    @attendee = TalkAttendee.find(params[:id])
-    @attendee.destroy
-    @talk = Talk.find(params[:talk_id])
+    @talk_attendee.destroy
     flash[:notice] = 'Successfully unregistered from talk.'
 
     respond_to do |format|
@@ -48,4 +29,12 @@ class TalkAttendeesController < ApplicationController
     end
   end
 
+  protected
+  def load_talk
+    @talk = Talk.find(params[:talk_id])
+  end
+
+  def new_talk_attendee_from_params
+    @talk_attendee = @talk.talk_attendees.new(:user => current_user)
+  end
 end

@@ -1,12 +1,15 @@
 class ConferencesController < ApplicationController
+  # Before filter to provide the objects for the actions where no params[:id]
+  # is available.  See TalksController for a case where this makes sense even
+  # for the index action.
+  before_filter :load_conference, :only => [:show, :edit, :update, :destroy]
+  before_filter :new_conference, :only => :new
+  before_filter :new_conference_from_params, :only => :create
   # Installs a before_filter to check accesses on all actions for the user's
-  # authorization.
-  filter_access_to :all
-  # Overrides the default checks by explicitly using attribute checks
-  # against the parameters.  This causes the declarative_authorization
-  # plugin to load a Conference object from params[:id] into
-  # the @conference instance variable.
-  filter_access_to :show, :edit, :update, :destroy, :attribute_check => true
+  # authorization.  :attribute_check causes the object in @conference to
+  # be checked against the conditions in the authorization rules.
+  filter_access_to :all, :attribute_check => true
+  filter_access_to :index, :attribute_check => false
   
   # GET /conferences
   # GET /conferences.xml
@@ -22,7 +25,7 @@ class ConferencesController < ApplicationController
   # GET /conferences/1
   # GET /conferences/1.xml
   def show
-    @conference = Conference.find(params[:id])
+    # @conference is loaded in before_filter
 
     respond_to do |format|
       format.html # show.html.erb
@@ -33,7 +36,7 @@ class ConferencesController < ApplicationController
   # GET /conferences/new
   # GET /conferences/new.xml
   def new
-    @conference = Conference.new
+    # @conference is created in before_filter
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,13 +46,13 @@ class ConferencesController < ApplicationController
 
   # GET /conferences/1/edit
   def edit
-    @conference = Conference.find(params[:id])
+    # @conference is loaded in before_filter
   end
 
   # POST /conferences
   # POST /conferences.xml
   def create
-    @conference = Conference.new(params[:conference])
+    # @conference is created in before_filter
 
     respond_to do |format|
       if @conference.save
@@ -66,7 +69,7 @@ class ConferencesController < ApplicationController
   # PUT /conferences/1
   # PUT /conferences/1.xml
   def update
-    @conference = Conference.find(params[:id])
+    # @conference is loaded in before_filter
 
     respond_to do |format|
       if @conference.update_attributes(params[:conference])
@@ -83,7 +86,7 @@ class ConferencesController < ApplicationController
   # DELETE /conferences/1
   # DELETE /conferences/1.xml
   def destroy
-    @conference = Conference.find(params[:id])
+    # @conference is loaded in before_filter
     @conference.destroy
 
     respond_to do |format|
@@ -100,5 +103,18 @@ class ConferencesController < ApplicationController
     [["Conferences", Conference.new]] +
       (conference && !conference.new_record? ? 
         [[conference.title, conference]] : [])
+  end
+
+  protected
+  def load_conference
+    @conference = Conference.find(params[:id])
+  end
+
+  def new_conference
+    @conference = Conference.new
+  end
+
+  def new_conference_from_params
+    @conference = Conference.new(params[:conference])
   end
 end

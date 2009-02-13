@@ -16,8 +16,7 @@
       <% if conference.is_attended_by?(current_user) and 
                 permitted_to? :delete, conference.attendence_of(current_user) %>
         <%= link_to 'Unregister', [conference, conference.attendence_of(current_user)], :method => :delete %>
-      <% elsif permitted_to? :create, 
-                ConferenceAttendee.new(:user => current_user, :conference => conference) %>
+      <% elsif permitted_to? :create, conference.conference_attendees.new(:user => current_user) %>
         <% form_for([conference, ConferenceAttendee.new]) do |f| %>
           <%= f.submit "Register" %>
         <% end %>

@@ -1,13 +1,15 @@
 class TalksController < ApplicationController
+  before_filter :load_conference
+  before_filter :load_talk, :only => [:show, :edit, :update, :destroy]
+  before_filter :new_talk, :only => [:new, :index]
+  before_filter :new_talk_from_params, :only => :create
   # See ConferenceController for comments on the most common use of 
   # filter_access_to
-  filter_access_to :all
-  filter_access_to :show, :update, :destroy, :attribute_check => true
+  filter_access_to :all, :attribute_check => true
   
   # GET /talks
   # GET /talks.xml
   def index
-    @conference = Conference.find(params[:conference_id])
     @talks = @conference.talks
 
     respond_to do |format|
@@ -19,8 +21,6 @@ class TalksController < ApplicationController
   # GET /talks/1
   # GET /talks/1.xml
   def show
-    @talk = Talk.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @talk }
@@ -30,8 +30,6 @@ class TalksController < ApplicationController
   # GET /talks/new
   # GET /talks/new.xml
   def new
-    @talk = Talk.new(:conference => Conference.find(params[:conference_id]))
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @talk }
@@ -40,15 +38,11 @@ class TalksController < ApplicationController
 
   # GET /talks/1/edit
   def edit
-    @talk = Talk.find(params[:id])
   end
 
   # POST /talks
   # POST /talks.xml
   def create
-    @talk = Talk.new(params[:talk])
-    @talk.conference_id = params[:conference_id]
-
     respond_to do |format|
       if @talk.save
         flash[:notice] = 'Talk was successfully created.'
@@ -64,8 +58,6 @@ class TalksController < ApplicationController
   # PUT /talks/1
   # PUT /talks/1.xml
   def update
-    @talk = Talk.find(params[:id])
-
     respond_to do |format|
       if @talk.update_attributes(params[:talk])
         flash[:notice] = 'Talk was successfully updated.'
@@ -81,8 +73,6 @@ class TalksController < ApplicationController
   # DELETE /talks/1
   # DELETE /talks/1.xml
   def destroy
-    @talk = Talk.find(params[:id])
-    @conference = Conference.find(params[:conference_id])
     @talk.destroy
 
     respond_to do |format|
@@ -99,5 +89,22 @@ class TalksController < ApplicationController
     (conference ? ConferencesController.breadcrumbs(conference) : []) +
       (talk && !talk.new_record? ? 
         [[talk.title, [conference, talk]]] : [])
+  end
+  
+  protected
+  def load_conference
+    @conference = Conference.find(params[:conference_id])
+  end
+
+  def load_talk
+    @talk = Talk.find(params[:id])
+  end
+  
+  def new_talk
+    @talk = @conference.talks.new
+  end
+
+  def new_talk_from_params
+    @talk = @conference.talks.new(params[:talk])
   end
 end

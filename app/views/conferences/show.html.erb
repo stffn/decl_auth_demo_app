@@ -6,5 +6,5 @@ At <b><%=h @conference.location %></b>
 
 <br />
 
-<%= link_to 'New talk', new_conference_talk_path(@conference) if permitted_to? :create, Talk.new(:conference => @conference) %>
+<%= link_to 'New talk', new_conference_talk_path(@conference) if permitted_to? :create, @conference.talks %>
 <%= link_to 'Edit conference', edit_conference_path(@conference) if permitted_to? :edit, @conference %>

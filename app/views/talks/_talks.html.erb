@@ -13,7 +13,7 @@
       <% if logged_in? %>
         <% if talk.is_attended_by?(current_user) %>
           <%= link_to 'Unattend talk', [talk.conference, talk, talk.attendence_of(current_user)], :method => :delete %>
-        <% elsif permitted_to? :create, TalkAttendee.new(:talk => talk, :user => current_user) %>
+        <% elsif permitted_to? :create, talk.talk_attendees.new(:user => current_user) %>
           <% form_for([talk.conference, talk, TalkAttendee.new]) do |f| %>
             <%= f.submit "Attend" %>
           <% end %>
