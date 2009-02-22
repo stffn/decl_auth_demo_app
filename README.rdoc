@@ -7,7 +7,7 @@ provides an RBAC-inspired and declarative approach to authorization.  It
 implements a DSL for specifying authorization rules outside of the program
 code.  See the declarative_authorization README for more information.
 
-http://github.com/stffn/decl_auth_demo_app/tree/master
+http://github.com/stffn/decl_auth_demo_app
 
 The demo app is a small conference management application, offering
 conference management for admins, conference and session sign up for
@@ -16,6 +16,9 @@ guests.
 
 For easing the testing of the various roles, a simple user switcher is
 provided as a drop-down at the top of each page.
+
+The declarative_authorization plugin lives at
+http://github.com/stffn/declarative_authorization
 
 == Getting Started
 
@@ -32,7 +35,7 @@ provided as a drop-down at the top of each page.
     git submodule init
     git submodule update
 
-* Start server and point your browser to localhost:3000 :)
+* Start server and point your browser to localhost:3000
     ./script/server
     firefox http://localhost:3000
 
@@ -46,6 +49,15 @@ provided as a drop-down at the top of each page.
     Talk *-(gives)-------------------------------'    |
       |                                               *
       `----------------------------------* TalkAttendees
+
+
+== Authorization Browser
+
+declarative_authorization comes with a browser for the application's
+authorization rules and usages.  Have a look at the information on the demo's
+authorization after having started the app by pointing your browser to:
+
+  http://localhost:3000/authorization_rules
 
 == Contact
 
