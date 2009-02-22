@@ -4,10 +4,11 @@ authorization do
       if_attribute :published => true
     end
     has_permission_on :talks, :to => :read do
-      if_attribute :conference => {:published => true}
+      if_permitted_to :read, :conference
     end
     has_permission_on :users, :to => :create
     has_permission_on :authorization_rules, :to => :read
+    has_permission_on :authorization_usages, :to => :read
   end
   
   role :user do
@@ -38,7 +39,8 @@ authorization do
   
   role :admin do
     has_permission_on [:conferences, :users, :talks], :to => :manage
-    has_permission_on :authorization_rules, :to => :manage
+    has_permission_on :authorization_rules, :to => :read
+    has_permission_on :authorization_usages, :to => :read
   end
 end
 
