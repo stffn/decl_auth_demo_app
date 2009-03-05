@@ -1,4 +1,8 @@
 class Conference < ActiveRecord::Base
+  # Activate model authorization by calling using_access_control.
+  # Every create, update, destroy will be checked and an exception raised
+  # if not allowed.  For performance reasons, read isn't checked by default,
+  # but may be enabled as an option.
   using_access_control
   
   has_many :talk_objs, :class_name => "Talk"

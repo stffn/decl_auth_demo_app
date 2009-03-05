@@ -8,12 +8,14 @@ class ConferencesControllerTest < ActionController::TestCase
   end
 
   def test_should_get_new
+    # check that an admin may view the new page
     get_with admin, :new
     assert_response :success
   end
 
   def test_should_create_conference
     assert_difference('Conference.count') do
+      # check that admins may create conferences
       post_with admin, :create, :conference => { :title => 'Test' }
     end
 

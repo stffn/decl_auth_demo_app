@@ -14,6 +14,7 @@ class ConferencesController < ApplicationController
   # GET /conferences
   # GET /conferences.xml
   def index
+    # Only show conferences that the current user may read:
     @conferences = Conference.with_permissions_to(:read)
 
     respond_to do |format|

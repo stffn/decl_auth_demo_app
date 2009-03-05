@@ -8,6 +8,7 @@
       <b><%= conference.attendees.count %></b> attendees.
     </p>
     <p>
+      <%# Check, if the current user may edit exactly this conference: %>
       <%= link_to 'Edit', edit_conference_path(conference) \
               if permitted_to? :edit, conference %>
       <%= link_to 'Destroy', conference, :confirm => 'Are you sure?', :method => :delete \
@@ -30,4 +31,5 @@
 
 <br />
 
+<%# Only check if the current user has the general permission to create conferences: %>
 <%= link_to 'New conference', new_conference_path if permitted_to? :create, :conferences %>

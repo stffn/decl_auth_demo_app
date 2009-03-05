@@ -4,5 +4,6 @@
 
 <br />
 
+<%# Check if the current user may create talks for the current conference %>
 <%= link_to 'New talk', new_conference_talk_path(@conference) \
         if permitted_to? :create, @conference.talks %>

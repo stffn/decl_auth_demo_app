@@ -51,6 +51,40 @@ http://github.com/stffn/declarative_authorization
       `----------------------------------* TalkAttendees
 
 
+== Most Interesting Spots
+
+A few tipps on where to start:
+
+* Controller authorization with before_filters to load context objects at
+  app/controllers/conference_controller.rb for a standard case and
+  app/controllers/talks_controller.rb for a nested controller.
+
+* Query rewriting to only retrieve those records from the database that the current
+  user has certain privileges on in app/controllers/conferences_controller.rb in
+  ConferencesController#index
+
+* Model authorization for conferences in app/models/conference.rb
+
+* View authorization: e.g.
+  app/views/conferences/index.html.erb
+  app/views/talks/index.html.erb
+
+* Authorization rules in config/authorization_rules.rb
+
+* Testing with specific roles in
+  test/unit/conferences_test.rb for user-specific model tests,
+  test/functional/conference_controller_test.rb for get/post/delete_with,
+  test/test_helper.rb for the test environment setup for decl_auth
+
+* decl_auth requirements:
+  * Controller#current_user in lib/authenticated_system.rb, which is included in
+    ApplicationController
+  * Setting Authorization.current_user for model security in
+    app/controllers/application_controller.rb
+  * A user model that responds to User#role_symbols with an Array of role symbols in
+    app/models/user.rb
+
+
 == Authorization Browser
 
 declarative_authorization comes with a browser for the application's
