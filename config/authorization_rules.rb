@@ -13,16 +13,16 @@ authorization do
   
   role :user do
     includes :guest
-    has_permission_on :conference_attendees, :to => :create do
-      if_attribute :user => is {user}, 
-        :conference => { :published => true }
+    has_permission_on :conference_attendees, :to => :create, :join_by => :and do
+      if_attribute :user => is {user}
+      if_permitted_to :read, :conference
     end
     has_permission_on :conference_attendees, :to => :delete do
-      if_attribute :user => is {user}, 
-        :conference => { :attendees => contains {user} }
+      if_attribute :user => is {user}
     end
     has_permission_on :talk_attendees, :to => :create do
-      if_attribute :talk => { :conference => { :attendees => contains {user} }}
+      if_attribute :talk => { :conference => { :attendees => contains {user} }},
+          :user => is {user}
     end
     has_permission_on :talk_attendees, :to => :delete do
       if_attribute :user => is {user}
