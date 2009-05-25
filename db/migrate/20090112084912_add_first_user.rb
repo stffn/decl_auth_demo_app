@@ -1,4 +1,4 @@
-require "vendor/plugins/declarative_authorization/lib/maintenance"
+require "vendor/plugins/declarative_authorization/lib/declarative_authorization/maintenance"
 
 class AddFirstUser < ActiveRecord::Migration
   def self.up
