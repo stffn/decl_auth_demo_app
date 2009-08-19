@@ -1,9 +1,12 @@
 class ConferenceAttendeesController < ApplicationController
-  before_filter :load_conference
-  before_filter :new_conference_attendee_from_params, :only => :create
-  # See ConferenceController for comments on the most common use of 
+  filter_resource_access :nested_in => :conferences
+  
+  # provided by filter_resource_access:
+  #before_filter :load_conference
+  #before_filter :new_conference_attendee, :only => :create
+  # See ConferenceController for comments on the most common use of
   # filter_access_to
-  filter_access_to :all, :attribute_check => true
+  #filter_access_to :all, :attribute_check => true
   
   def create
     respond_to do |format|
@@ -30,10 +33,12 @@ class ConferenceAttendeesController < ApplicationController
   end
 
   protected
-  def load_conference
-    @conference = Conference.find(params[:conference_id])
-  end
+  # provided by filter_resource_access
+  #def load_conference
+  #  @conference = Conference.find(params[:conference_id])
+  #end
 
+  # Overriding the default filter_resource_access new method:
   def new_conference_attendee_from_params
     @conference_attendee = @conference.conference_attendees.new(:user => current_user)
   end

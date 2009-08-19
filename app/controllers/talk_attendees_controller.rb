@@ -1,9 +1,10 @@
 class TalkAttendeesController < ApplicationController
-  before_filter :load_talk
-  before_filter :new_talk_attendee_from_params, :only => :create
-  # See ConferenceController for comments on the most common use of 
-  # filter_access_to
-  filter_access_to :all, :attribute_check => true
+  filter_resource_access :nested_in => :talks
+
+  # provided by filter_resource_access:
+  #before_filter :load_talk
+  #before_filter :new_talk_attendee, :only => :create
+  #filter_access_to :all, :attribute_check => true
 
   def create
     respond_to do |format|
@@ -30,10 +31,12 @@ class TalkAttendeesController < ApplicationController
   end
 
   protected
-  def load_talk
-    @talk = Talk.find(params[:talk_id])
-  end
+  # provided by filter_resource_access:
+  #def load_talk
+  #  @talk = Talk.find(params[:talk_id])
+  #end
 
+  # overwriting default filter_resource_access new method:
   def new_talk_attendee_from_params
     @talk_attendee = @talk.talk_attendees.new(:user => current_user)
   end

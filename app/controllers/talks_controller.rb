@@ -1,11 +1,11 @@
 class TalksController < ApplicationController
-  before_filter :load_conference
-  before_filter :load_talk, :only => [:show, :edit, :update, :destroy]
-  before_filter :new_talk, :only => [:new, :index]
-  before_filter :new_talk_from_params, :only => :create
-  # See ConferenceController for comments on the most common use of 
-  # filter_access_to
-  filter_access_to :all, :attribute_check => true
+  filter_resource_access :nested_in => :conferences
+
+  # provided by filter_resource_access:
+  #before_filter :load_conference
+  #before_filter :load_talk, :only => [:show, :edit, :update, :destroy]
+  #before_filter :new_talk, :only => [:new, :create, :index]
+  #filter_access_to :all, :attribute_check => true
   
   # GET /talks
   # GET /talks.xml
@@ -92,19 +92,16 @@ class TalksController < ApplicationController
   end
   
   protected
-  def load_conference
-    @conference = Conference.find(params[:conference_id])
-  end
-
-  def load_talk
-    @talk = Talk.find(params[:id])
-  end
-  
-  def new_talk
-    @talk = @conference.talks.new
-  end
-
-  def new_talk_from_params
-    @talk = @conference.talks.new(params[:talk])
-  end
+  # provided by the default filter_resource_access before_filters
+  #def load_conference
+  #  @conference = Conference.find(params[:conference_id])
+  #end
+  #
+  #def load_talk
+  #  @talk = Talk.find(params[:id])
+  #end
+  #
+  #def new_talk
+  #  @talk = @conference.talks.new(params[:talk])
+  #end
 end

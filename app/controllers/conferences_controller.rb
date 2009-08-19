@@ -1,16 +1,31 @@
 class ConferencesController < ApplicationController
+  # filter_resource_access is a shorthand for typical filter_access_to
+  # statements and before_filters in restful controllers
+  filter_resource_access
+
+  # These are the default options for this controller
+  #filter_resource_access :collection => :index,
+  #    :new          => [:new, :create],
+  #    :member       => [:show, :edit, :update, :destroy],
+  #    :nested_in    => nil,
+  #    :context      => :conferences,
+  #    :no_attribute_check => :index
+
+
+  # The filter_resource_access is equivalent to the following filter_access_to
+  # calls:
+  #
   # Before filter to provide the objects for the actions where no params[:id]
   # is available.  See TalksController for a case where this makes sense even
   # for the index action.
-  before_filter :load_conference, :only => [:show, :edit, :update, :destroy]
-  before_filter :new_conference, :only => :new
-  before_filter :new_conference_from_params, :only => :create
+  #before_filter :load_conference, :only => [:show, :edit, :update, :destroy]
+  #before_filter :new_conference, :only => [:new, :create]
   # Installs a before_filter to check accesses on all actions for the user's
   # authorization.  :attribute_check causes the object in @conference to
   # be checked against the conditions in the authorization rules.
-  filter_access_to :all, :attribute_check => true
-  filter_access_to :index, :attribute_check => false
-  
+  #filter_access_to :all, :attribute_check => true
+  #filter_access_to :index, :attribute_check => false
+
   # GET /conferences
   # GET /conferences.xml
   def index
@@ -107,15 +122,12 @@ class ConferencesController < ApplicationController
   end
 
   protected
-  def load_conference
-    @conference = Conference.find(params[:id])
-  end
-
-  def new_conference
-    @conference = Conference.new
-  end
-
-  def new_conference_from_params
-    @conference = Conference.new(params[:conference])
-  end
+  # provided by the default filter_resource_access before_filters
+  #def load_conference
+  #  @conference = Conference.find(params[:id])
+  #end
+  #
+  #def new_conference
+  #  @conference = Conference.new(params[:conference])
+  #end
 end
