@@ -17,8 +17,10 @@ Rails::Initializer.run do |config|
   #
   # Instead of using the git submodule with the declarative_authorization plugin
   # in vendor/plugins/declarative_authorization, you may also use the plugin's
-  # gem:
-  #config.gem "stffn-declarative_authorization", :lib => "declarative_authorization"
+  # gem.  To install it, setup gemcutter, i.e.
+  #   gem install gemcutter
+  #   gem tumble
+  #config.gem "declarative_authorization"
 
   # Force all environments to use the same logger level
   # (by default production uses :info, the others :debug)
