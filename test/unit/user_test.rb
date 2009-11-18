@@ -13,6 +13,11 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  def test_empty_role_symbols
+    user = create_user
+    assert_equal [], user.role_symbols
+  end
+
 #  def test_should_require_login
 #    assert_no_difference 'User.count' do
 #      u = create_user(:login => nil)

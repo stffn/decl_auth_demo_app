@@ -4,7 +4,7 @@ class ConferenceAttendeesTest < ActiveSupport::TestCase
   def test_should_create
     assert_difference "ConferenceAttendee.count" do
       with_user users(:user) do
-        conferences(:public).conference_attendees.create(:user => users(:user))
+        conferences(:public).conference_attendees.create!(:user => users(:user))
       end
     end
   end

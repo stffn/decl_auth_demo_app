@@ -7,6 +7,11 @@ class ConferencesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:conferences)
   end
 
+  def test_should_get_index_for_user_without_roles
+    get_with users(:without_roles), :index
+    assert_response :success
+  end
+
   def test_should_get_new
     # check that an admin may view the new page
     get_with admin, :new
