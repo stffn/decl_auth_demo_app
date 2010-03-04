@@ -1,6 +1,6 @@
-<h1>Talks for <%= h @conference.title %></h1>
+<h1>Talks for <%= @conference.title %></h1>
 
-<%= render :partial => 'talks', :object => @talks %>
+<%= render 'talks', :talks => @talks %>
 
 <br />
 

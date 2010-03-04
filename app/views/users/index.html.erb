@@ -7,8 +7,8 @@
   </tr>
 <% for user in @users %>
   <tr>
-    <td><b><%= h user.login %></b></td>
-    <td><%= h user.roles.map(&:to_s) * ',' if user.roles %></td>
+    <td><b><%= user.login %></b></td>
+    <td><%= user.roles.map(&:to_s) * ',' if user.roles %></td>
     <td>
       <%= link_to 'Edit', edit_user_path(user) if permitted_to? :edit, user %>
       <%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete if permitted_to? :delete, user %>

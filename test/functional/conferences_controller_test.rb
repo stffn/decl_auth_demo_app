@@ -28,7 +28,12 @@ class ConferencesControllerTest < ActionController::TestCase
   end
 
   def test_should_show_conference
-    get :show, :id => conferences(:one).id
+    begin
+      get :show, :id => conferences(:one).id
+    rescue Exception => e
+      puts e.backtrace
+      raise
+    end
     assert_response :success
   end
 

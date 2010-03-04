@@ -1,4 +1,4 @@
-<h1>New talk for <%= h @talk.conference.title %></h1>
+<h1>New talk for <%= @talk.conference.title %></h1>
 
 <% form_for([@talk.conference, @talk]) do |f| %>
   <%= f.error_messages %>

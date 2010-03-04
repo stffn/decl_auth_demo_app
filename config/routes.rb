@@ -1,32 +1,25 @@
-ActionController::Routing::Routes.draw do |map|
+DeclAuthDemoApp::Application.routes.draw do
 
-  map.resources :conferences do |conference|
-    conference.resources :talks do |talk|
-      talk.resources :talk_attendees, :as => :attendees
+  resources :conferences do
+    resources :talks do
+      resources :talk_attendees, :as => :attendees
     end
-    conference.resources :conference_attendees, :as => :attendees
+    resources :conference_attendees, :as => :attendees
   end
 
-  map.logout '/logout', :controller => 'sessions', :action => 'destroy'
-  map.login '/login', :controller => 'sessions', :action => 'new'
-  map.register '/register', :controller => 'users', :action => 'create'
-  map.signup '/signup', :controller => 'users', :action => 'new'
-  map.resources :users
+  match '/logout', :to => "sessions#destroy", :as => "logout"
+  match '/login', :to => "sessions#new", :as => "login"
+  match '/register', :to => 'users#create', :as => "register"
+  match '/signup', :to => 'users#new', :as => "signup"
 
-  map.resource :session
-
-  # Sample resource route within a namespace:
-  #   map.namespace :admin do |admin|
-  #     # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
-  #     admin.resources :products
-  #   end
-
-  # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  map.root :controller => "conferences"
+  resources :users
+  resource :session
+  
+  root :to => "conferences#index"
 
   # See how all your routes lay out with "rake routes"
 
-  # Install the default routes as the lowest priority.
-  #map.connect ':controller/:action/:id'
-  #map.connect ':controller/:action/:id.:format'
+  # This is a legacy wild controller route that's not recommended for RESTful applications.
+  # Note: This route will make all actions in every controller accessible via GET requests.
+  # match ':controller(/:action(/:id(.:format)))'
 end

@@ -2,7 +2,7 @@
 At <b><%=h @conference.location %></b>
 
 <h2>Talks</h2>
-<%= render :partial => 'talks/talks', :object => @conference.talks %>
+<%= render 'talks/talks', :talks => @conference.talks %>
 
 <br />
 

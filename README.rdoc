@@ -35,8 +35,11 @@ http://github.com/stffn/declarative_authorization
     git submodule init
     git submodule update
 
+* Set up gems
+    bundle install && bundle pack
+
 * Start server and point your browser to localhost:3000
-    ./script/server
+    ./script/rails server
     firefox http://localhost:3000
 
 
@@ -102,6 +105,6 @@ sbartsch at tzi.org
 
 == Licence
 
-Copyright (c) 2008 Steffen Bartsch, TZI, Universität Bremen, Germany
+Copyright (c) 2008-2010 Steffen Bartsch, TZI, Universität Bremen, Germany
 released under the MIT license
 
