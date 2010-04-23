@@ -2,9 +2,9 @@ DeclAuthDemoApp::Application.routes.draw do
 
   resources :conferences do
     resources :talks do
-      resources :talk_attendees, :as => :attendees
+      resources :talk_attendees#, :as => :attendees
     end
-    resources :conference_attendees, :as => :attendees
+    resources :conference_attendees#, :as => :attendees
   end
 
   match '/logout', :to => "sessions#destroy", :as => "logout"
