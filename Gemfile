@@ -2,7 +2,7 @@
 source 'http://gemcutter.org'
 
 
-gem "rails", "3.0.0.beta3"
+gem "rails", "3.0.0"
 
 ## Bundle edge rails:
 # gem "rails", :git => "git://github.com/rails/rails.git"
@@ -12,4 +12,4 @@ gem "rails", "3.0.0.beta3"
 gem "sqlite3-ruby", :require => "sqlite3"
 
 # To use declarative_authorization as a Gem, add this line
-# gem "declarative_authorization"
+gem "declarative_authorization", "0.5"

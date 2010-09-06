@@ -1,6 +1,8 @@
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 
+require "lib/authenticated_system.rb"
+
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   helper_method :current_user, :logged_in?
